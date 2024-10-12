@@ -3,31 +3,25 @@ import * as vscode from 'vscode';
 export function activate(context: vscode.ExtensionContext) {
     console.log("Ativando a extensão Jaccon");
 
-    // Cria um item na Status Bar com o texto 'jcgpt'
-    let statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-    statusBarItem.text = `$(rocket) jcgpt`;
+    const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+    statusBarItem.text = `$(link) jcgpt`;
     statusBarItem.command = 'jaccon.openWebview';
     statusBarItem.tooltip = 'Clique para abrir o Jaccon Webview';
     statusBarItem.show();
 
     context.subscriptions.push(statusBarItem);
 
-    // Registra o comando para abrir o Webview
     let disposable = vscode.commands.registerCommand('jaccon.openWebview', () => {
-        console.log("Comando 'jaccon.openWebview' foi executado.");
-
-        // Criação do painel de Webview
         const panel = vscode.window.createWebviewPanel(
-            'jacconWebview', // Identificador do Webview
-            'Jaccon ChatGPT Extension', // Título do painel
-            vscode.ViewColumn.Active, // Posição do painel
-            { 
-                enableScripts: true,  // Permitir execução de scripts no Webview
-                retainContextWhenHidden: true, // Preserva o estado do Webview quando oculto
+            'jcgpt',
+            'jcGPT',
+            vscode.ViewColumn.Active, // Mantenha na coluna ativa
+            {
+                enableScripts: true,
+                retainContextWhenHidden: true,
             }
         );
 
-        // Define o conteúdo do Webview
         panel.webview.html = getWebviewContent();
     });
 
@@ -44,15 +38,15 @@ function getWebviewContent() {
             <title>Jaccon</title>
             <style>
                 body, html {
-                    height: 100%; /* 100% da altura do Webview */
-                    margin: 0; /* Remove margem */
-                    padding: 0; /* Remove preenchimento */
-                    overflow: hidden; /* Oculta barras de rolagem */
+                    height: 100%;
+                    margin: 0;
+                    padding: 0;
+                    overflow: hidden;
                 }
                 iframe {
-                    width: 100%; /* 100% da largura do Webview */
-                    height: 100%; /* 100% da altura do Webview */
-                    border: none; /* Remove bordas do iframe */
+                    width: 100%;
+                    height: 100%;
+                    border: none;
                 }
             </style>
         </head>

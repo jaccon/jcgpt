@@ -19,6 +19,13 @@
         "command": "jaccon.openWebview",
         "title": "jcgpt"
       }
+    ],
+    "keybindings": [
+      {
+        "command": "jaccon.openWebview",
+        "key": "ctrl+j",
+        "when": "editorTextFocus"
+      }
     ]
   },
   "scripts": {
